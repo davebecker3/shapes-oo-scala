@@ -7,7 +7,7 @@ sealed trait Shape
 
 case class Rectangle(width: Int, height: Int) extends Shape
 
-case class Ellipse(width: Int, height: Int) extends Shape
+case class Ellipse(half_width: Int, half_height: Int) extends Shape
 
 case class Group(shape: Shape*) extends Shape
 
