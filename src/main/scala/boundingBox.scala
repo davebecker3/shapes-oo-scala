@@ -8,43 +8,15 @@ object boundingBox {
     case Ellipse(half_width,half_height) => Location(0 - half_width, 0 - half_height,
       Rectangle(half_width * 2, half_height * 2))
 
-    case Group(shapes @ _*) =>  Location(shapes.map({
-      boundingBox(_).x
-    }).min, 0,Rectangle(0,0))
+    case Group(shapes @ _*) =>  Location(
+      shapes.map({boundingBox(_).x}).min,
+      shapes.map({boundingBox(_).y}).min,
+      Rectangle(
 
 
-    case OldGroup(shapes @ _*) =>  Location({
-      val xs = Set.newBuilder[Int]
-      val ys = Set.newBuilder[Int]
-      val ws = Set.newBuilder[Int]
-      val hs = Set.newBuilder[Int]
-      for (s <- shapes){
-        val temp_loc = boundingBox(s)
-        xs.+=(temp_loc.x)
-        ys.+=(temp_loc.y)
-        val shape = temp_loc.shape
-        shape match{
-          case Rectangle(width @ _, height @ _) => {
-            ws +=(width)
-            hs +=(height)
-          }
-          case _ => println("WTF?")
-        }
-
-        val fin_x = xs.result().min
-        val fin_y = ys.result().min
-        val fin_w = ws.result().max
-        val fin_h = hs.result().max
-
-        val fin_loc = Location(fin_x, fin_y, Rectangle(fin_w, fin_h))
-
-      }
-
-
-
-    })
-
-
+        shapes.map({boundingBox(_).x}).reduceLeft((x,y) => if (x.length > y.length) x else y )),
+        shapes.map({boundingBox(_).shape.asInstanceOf[Rectangle].height}).max)
+      )
 
     case Location(x,y,shape) => Location(x, y, boundingBox(shape).shape)
 
