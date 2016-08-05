@@ -7,7 +7,13 @@ object boundingBox {
     case Rectangle(width, height) => Location(0, 0, Rectangle(width, height))
     case Ellipse(half_width,half_height) => Location(0 - half_width, 0 - half_height,
       Rectangle(half_width * 2, half_height * 2))
-    case Group(shapes @ _*) =>  Location({
+
+    case Group(shapes @ _*) =>  Location(shapes.map({
+      boundingBox(_).x
+    }).min, 0,Rectangle(0,0))
+
+
+    case OldGroup(shapes @ _*) =>  Location({
       val xs = Set.newBuilder[Int]
       val ys = Set.newBuilder[Int]
       val ws = Set.newBuilder[Int]
