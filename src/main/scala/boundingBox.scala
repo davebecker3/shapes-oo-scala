@@ -9,13 +9,11 @@ object boundingBox {
       Rectangle(half_width * 2, half_height * 2))
 
     case Group(shapes @ _*) =>  Location(
-      shapes.map({boundingBox(_).x}).min,
-      shapes.map({boundingBox(_).y}).min,
-      Rectangle(
 
+      shapes.map(boundingBox(_).x).min,
+      shapes.map(boundingBox(_).y).min,
 
-        shapes.map({boundingBox(_).x}).reduceLeft((x,y) => if (x.length > y.length) x else y )),
-        shapes.map({boundingBox(_).shape.asInstanceOf[Rectangle].height}).max)
+      Rectangle(0,0)
       )
 
     case Location(x,y,shape) => Location(x, y, boundingBox(shape).shape)
