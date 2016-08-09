@@ -13,8 +13,21 @@ object boundingBox {
       shapes.map(boundingBox(_).x).min,
       shapes.map(boundingBox(_).y).min,
 
-      Rectangle(0,0)
-      )
+      Rectangle(shapes.map({
+        def max_x(s: Shape): Int = {
+          val location = boundingBox(s)
+          val x = location.x
+          val w = location.shape.asInstanceOf[Rectangle].width
+          val absoluteWidth = x - w
+          absoluteWidth
+        }
+        max_x(_)
+      }).max
+
+
+        ,0)
+
+    )
 
     case Location(x,y,shape) => Location(x, y, boundingBox(shape).shape)
 
