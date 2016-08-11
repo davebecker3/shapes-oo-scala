@@ -13,16 +13,20 @@ object boundingBox {
       shapes.map(boundingBox(_).x).min,
       shapes.map(boundingBox(_).y).min,
 
-      Rectangle(shapes.map({
-        def max_x(s: Shape): Int = {
-          val location = boundingBox(s)
-          val x = location.x
-          val w = location.shape.asInstanceOf[Rectangle].width
-          val absoluteWidth = x - w
-          absoluteWidth
+      Rectangle(
+
+        {val groupMinX = shapes.map(boundingBox(_).x).min
+
+          shapes.map({
+        def max_x(minX: Int, s: Shape): Int = {
+          val temp_loc = boundingBox(s)
+          val temp_x = temp_loc.x
+          val temp_width = temp_loc.shape.asInstanceOf[Rectangle].width
+          if (temp_x == minX) temp_width else (temp_width - minX)
         }
-        max_x(_)
-      }).max
+
+        max_x(groupMinX, _)
+      }).max}
 
 
         ,0)
