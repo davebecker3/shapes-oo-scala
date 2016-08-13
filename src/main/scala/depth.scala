@@ -11,6 +11,6 @@ object depth {
     case Ellipse(_, _) => 1
     case Location(_, _, shape @ _) => depth(shape) + 1
     case Group(shapes @ _*) => shapes.map(depth(_)).max + 1
-    case _ => {println("Function \"size\" received object of unknown type."); 0}
+    case _ => {println("Function \"depth\" received object of unknown type."); 0}
   }
 }
