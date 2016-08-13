@@ -6,6 +6,7 @@ import TestFixtures._
 
 // Copied file from "TestBoundingBox.scala".
 
+
 class TestSize extends FunSuite {
 
   def testSize(description: String, s: Shape, objective: Int) = {

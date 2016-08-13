@@ -6,6 +6,7 @@ import TestFixtures._
 
 // Copied file from "TestSize.scala".
 
+
 class TestDepth extends FunSuite {
 
   def testDepth(description: String, s: Shape, objective: Int) = {
