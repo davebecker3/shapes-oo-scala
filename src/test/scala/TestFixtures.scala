@@ -18,7 +18,7 @@ object TestFixtures {
   )
 
   val complexGroup =
-    Location(50, 100,
+   // Location(50, 100,
       Group(
        Ellipse(20, 40),
        Location(150, 50,
@@ -30,5 +30,6 @@ object TestFixtures {
             )
         )),
         Rectangle(100, 200)
-    ))
+    )
+  //)
 }

@@ -27,17 +27,22 @@ object scale {
       scale(shape, perc)
     )
 
-    case Group(shapes @ _*) => Group{
+    case Group(shapes @ _*) => Group {
       // I can't figure out how to populate the returned Group object with the modified contents of the
       // received Group. If I iterate through the contents of the received Group using ".map()",
       // it returns a Seq[Shape], which the constructor won't accept, and if I use ".foreach()" or a "for"
       // comprehension, the return type is Unit, which doesn't work eiher.
 
       println("Function \"scale\" received an object of type \"Group\", which I don't know how to process.")
+      println(shapes)
+      val n = shapes.map(scale(_, perc))
+      n.toArray
+     // shapes
 
-      shapes.map(scale(_, perc))
 
-      Rectangle(0, 0)
+        Rectangle(100, 200)
+
+      //  Rectangle(0, 0)
     }
 
     case _ => {

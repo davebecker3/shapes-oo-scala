@@ -65,6 +65,7 @@ class TestScale extends FunSuite {
       println("Function \"testScale\" received test fixture, \"" + description +
         "\", but I don't know how to process it, since recursive testing isn't allowed.")
 
+      println(shapes.map(scale(_,20)))
       test(description) {assert("I'm awesome!" === "I'm awesome!")}
 
     }
@@ -72,10 +73,10 @@ class TestScale extends FunSuite {
     case _ => {println("Function \"testScale\" received object of unknown type.")}
   }
 
-  testScale("simple ellipse", simpleEllipse, 100)
-  testScale("simple rectangle", simpleRectangle, 100)
-  testScale("simple location", simpleLocation, 100)
-  testScale("basic group", basicGroup, 100)
-  testScale("simple group", simpleGroup, 100)
+ // testScale("simple ellipse", simpleEllipse, 100)
+//  testScale("simple rectangle", simpleRectangle, 100)
+//  testScale("simple location", simpleLocation, 100)
+ // testScale("basic group", basicGroup, 100)
+// testScale("simple group", simpleGroup, 100)
   testScale("complex group", complexGroup, 100)
 }
