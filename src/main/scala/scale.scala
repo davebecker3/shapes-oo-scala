@@ -27,18 +27,8 @@ object scale {
       scale(shape, perc)
     )
 
-    case Group(shapes @ _*) => Group{
-      // I can't figure out how to populate the returned Group object with the modified contents of the
-      // received Group. If I iterate through the contents of the received Group using ".map()",
-      // it returns a Seq[Shape], which the constructor won't accept, and if I use ".foreach()" or a "for"
-      // comprehension, the return type is Unit, which doesn't work eiher.
-
-      println("Function \"scale\" received an object of type \"Group\", which I don't know how to process.")
-
-      shapes.map(scale(_, perc))
-
-      Rectangle(0, 0)
-    }
+    case Group(shapes @ _*) => Group(shapes.map(scale(_, perc)): _*)
+      // http://stackoverflow.com/questions/7040382/scala-constructor-taking-either-seq-or-varargs
 
 
     case _ => {
