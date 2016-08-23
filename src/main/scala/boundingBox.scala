@@ -2,6 +2,8 @@ package edu.luc.cs.laufer.cs372.shapes
 
 import edu.luc.cs.laufer.cs372.shapes
 
+import scala.collection.mutable.ArrayBuffer
+
 // TODO: implement this behavior
 
 object boundingBox {
@@ -25,6 +27,33 @@ object boundingBox {
         val temp_height = temp_loc.shape.asInstanceOf[Rectangle].height
         temp_height + temp_loc.y
       }
+
+      // val results = shapes.map({getRight(_); getBottom(_); boundingBox(_).x; boundingBox(_).y})
+
+      // val results: (Seq[Int], Seq[Int]) = shapes.map({getRight(_); getBottom(_)})
+
+      val results = {
+       for {
+         sh <- shapes
+         x = boundingBox(sh).x
+         y = boundingBox(sh).y
+         right = getRight(sh)
+         bottom = getBottom(sh)
+       } yield (x, y, right, bottom)
+      }
+
+      println("\"results\" from running \".boundingBox()\" on a \"Group\": " + results)
+
+      val list_x = for {
+        tup <- results
+      } yield (tup._1)
+
+      println("\"list_x\" from running \".boundingBox()\" on a \"Group\": " + list_x)
+
+      val list_y = results.map(_._2)
+
+      println("\"list_y\" from running \".boundingBox()\" on a \"Group\": " + list_y)
+
 
       val right = shapes.map(getRight(_)).max
       val bottom = shapes.map(getBottom(_)).max

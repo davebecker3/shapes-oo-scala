@@ -40,6 +40,7 @@ object scale {
       Rectangle(0, 0)
     }
 
+
     case _ => {
       println("Function \"scale\" received object of unknown type.")
       Rectangle(0,0)
