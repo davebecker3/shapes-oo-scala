@@ -16,6 +16,8 @@ object boundingBox {
 
     case Group(shapes @ _*) =>  {
 
+      /*
+      // =============================================================
       def getRight(s: Shape): Int = {
         val temp_loc = boundingBox(s)
         val temp_width = temp_loc.shape.asInstanceOf[Rectangle].width
@@ -28,33 +30,6 @@ object boundingBox {
         temp_height + temp_loc.y
       }
 
-      // val results = shapes.map({getRight(_); getBottom(_); boundingBox(_).x; boundingBox(_).y})
-
-      // val results: (Seq[Int], Seq[Int]) = shapes.map({getRight(_); getBottom(_)})
-
-      val results = {
-       for {
-         sh <- shapes
-         x = boundingBox(sh).x
-         y = boundingBox(sh).y
-         right = getRight(sh)
-         bottom = getBottom(sh)
-       } yield (x, y, right, bottom)
-      }
-
-      println("\"results\" from running \".boundingBox()\" on a \"Group\": " + results)
-
-      val list_x = for {
-        tup <- results
-      } yield (tup._1)
-
-      println("\"list_x\" from running \".boundingBox()\" on a \"Group\": " + list_x)
-
-      val list_y = results.map(_._2)
-
-      println("\"list_y\" from running \".boundingBox()\" on a \"Group\": " + list_y)
-
-
       val right = shapes.map(getRight(_)).max
       val bottom = shapes.map(getBottom(_)).max
 
@@ -62,6 +37,31 @@ object boundingBox {
       val min_y = shapes.map(boundingBox(_).y).min
 
       Location(min_x, min_y, Rectangle(right - min_x, bottom - min_y))
+      // =============================================================
+      */
+
+
+      // =============================================================
+      val boundingBoxResults = {
+       for {
+         sh <- shapes
+         loc = boundingBox(sh)
+         x = loc.x
+         y = loc.y
+         width = loc.shape.asInstanceOf[Rectangle].width
+         height = loc.shape.asInstanceOf[Rectangle].height
+         right = (width + x)
+         bottom = (height + y)
+       } yield (x, y, right, bottom)
+      }
+
+      val minX = boundingBoxResults.map(_._1).min
+      val minY = boundingBoxResults.map(_._2).min
+      val maxRight = boundingBoxResults.map(_._3).max
+      val maxBottom = boundingBoxResults.map(_._4).max
+
+      Location(minX, minY, Rectangle(maxRight - minX, maxBottom - minY))
+      // =============================================================
 
     }
 
