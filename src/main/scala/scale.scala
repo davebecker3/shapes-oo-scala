@@ -29,6 +29,7 @@ object scale {
 
     case Group(shapes @ _*) => Group(shapes.map(scale(_, perc)): _*)
       // http://stackoverflow.com/questions/7040382/scala-constructor-taking-either-seq-or-varargs
+      // println("■" + " ;-) ")
 
     case _ => {
       println("Function \"scale\" received object of unknown type.")

@@ -66,11 +66,11 @@ class TestScale extends FunSuite {
         "\", but I don't know how to process it, since recursive testing isn't allowed.")
 
       test(description) {assert("I'm awesome!" === "I'm awesome!")}
-
     }
 
     case _ => {println("Function \"testScale\" received object of unknown type.")}
   }
+
 
   testScale("simple ellipse", simpleEllipse, 100)
   testScale("simple rectangle", simpleRectangle, 100)

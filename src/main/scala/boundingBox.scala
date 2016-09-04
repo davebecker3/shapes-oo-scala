@@ -83,6 +83,8 @@ object boundingBox {
       val maxBottom = boundingBoxResults.map(_._4).max
 
       Location(minX, minY, Rectangle(maxRight - minX, maxBottom - minY))
+
+      // println("■" + " ;-) ")
       // =============================================================
 
     }
